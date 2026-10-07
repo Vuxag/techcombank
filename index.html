@@ -174,21 +174,8 @@
     .brief-list dd { margin:0; color:#fff; font-size:.9rem; font-weight:650; }
     .constraint { margin:22px 0 0; padding:16px 18px; border-radius:16px; background:rgba(255,255,255,.10); color:rgba(255,255,255,.78); font-size:.84rem; }
 
-    .summary { position:relative; z-index:2; margin-top:0; padding-top:48px; }
-    .summary-grid {
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      overflow:hidden;
-      border:1px solid var(--line);
-      border-radius:26px;
-      background:#fff;
-      box-shadow:var(--shadow);
-    }
-    .summary-item { min-height:180px; padding:27px; border-right:1px solid var(--line); }
-    .summary-item:last-child { border-right:0; }
-    .summary-item .kicker { color:var(--red-600); font-size:.75rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
-    .summary-item h2 { margin:14px 0 10px; font-size:1.18rem; letter-spacing:-.02em; }
-    .summary-item p { margin:0; color:var(--muted); font-size:.86rem; line-height:1.55; }
+    .case-intro { padding-top:clamp(28px,4vw,48px); padding-bottom:28px; }
+    .case-intro p { max-width:900px; margin:0; color:var(--ink-2); font-size:clamp(1.15rem,2.2vw,1.65rem); font-weight:500; line-height:1.5; letter-spacing:-.02em; }
 
     .section { padding:clamp(80px,10vw,132px) 0; }
     .section.white { background:#fff; }
@@ -490,9 +477,6 @@
       .hero { min-height:auto; }
       .hero-grid,.attention-system,.review-layout,.reflection-grid { grid-template-columns:1fr; }
       .hero-panel { max-width:620px; }
-      .summary-grid { grid-template-columns:repeat(2,1fr); }
-      .summary-item:nth-child(2) { border-right:0; }
-      .summary-item:nth-child(-n+2) { border-bottom:1px solid var(--line); }
       .layers { grid-template-columns:repeat(2,1fr); }
       .attention-copy { position:static; }
       .flow-route { grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr) 28px minmax(0,1fr); }
@@ -519,10 +503,6 @@
       .hero-copy { font-size:1.03rem; }
       .hero-panel { padding:22px; border-radius:24px; }
       .brief-list div { grid-template-columns:92px 1fr; gap:12px; }
-      .summary { margin-top:0; padding-top:28px; }
-      .summary-grid { grid-template-columns:1fr; border-radius:20px; }
-      .summary-item { min-height:0; padding:23px; border-right:0; border-bottom:1px solid var(--line); }
-      .summary-item:last-child { border-bottom:0; }
       .section { padding:76px 0; }
       .section-head { grid-template-columns:1fr; gap:13px; margin-bottom:34px; }
       .section h2 { font-size:clamp(2.05rem,10vw,3.1rem); }
@@ -586,6 +566,21 @@
       html { scroll-behavior:auto; }
       *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; }
     }
+
+    /* Self-contained case-study process animation. */
+    .tcb-motion { margin:0 auto 0; padding-bottom:clamp(48px,6vw,80px); pointer-events:none; user-select:none; }
+    .tcb-motion-frame { overflow:hidden; background:#fff; border:1px solid var(--line); border-radius:var(--radius); box-shadow:0 12px 40px rgba(27,31,36,.04); }
+    .tcb-motion svg { display:block; width:100%; height:auto; }
+    .tcb-motion svg text { font-family:Inter,Arial,Helvetica,sans-serif; }
+    .tcb-motion .step { will-change:opacity,transform; }
+    .tcb-motion .connector { fill:none; stroke:#23262c; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
+    @media(max-width:640px) {
+      .tcb-motion[data-layout="mobile"] .tcb-motion-decoration { display:none; }
+    }
+    @media print {
+      .tcb-motion { padding-bottom:24px; }
+      .tcb-motion-frame { border:0; box-shadow:none; }
+    }
   </style>
 </head>
 <body>
@@ -608,14 +603,36 @@
     </header>
 
     <main>
-      <div class="summary shell" id="overview" aria-label="Case study summary">
-        <div class="summary-grid">
-          <article class="summary-item"><span class="kicker">Problem</span><h2>Too many jobs, similar priority</h2><p>Trust, transactions, instant actions, and growth content compete on the same screen.</p></article>
-          <article class="summary-item"><span class="kicker">Diagnosis</span><h2>Offerings before attention needs</h2><p>The interface reflects product structure more clearly than the urgency of user jobs.</p></article>
-          <article class="summary-item"><span class="kicker">Response</span><h2>A layered attention system</h2><p>Context → Trust → Core → Quick → Growth, each with a distinct role.</p></article>
-          <article class="summary-item"><span class="kicker">Decision</span><h2>Preserve the mental model</h2><p>Change hierarchy and placement without forcing frequent users to relearn Home.</p></article>
-        </div>
+      <div class="case-intro shell" id="overview" aria-label="Case study overview">
+        <p>Reorganizing Techcombank Home around user intent while preserving familiar banking interactions.</p>
       </div>
+
+      <section class="tcb-motion shell" id="design-process" aria-label="Animated concept process">
+        <div class="tcb-motion-frame">
+<svg id="tcb-motion-art" viewBox="0 0 1120 680" role="img" aria-labelledby="tcb-motion-svg-title tcb-motion-svg-desc">
+<title id="tcb-motion-svg-title">Techcombank mobile Home — Concept process</title>
+<desc id="tcb-motion-svg-desc">Six steps of an independent Techcombank Home concept: evidence, working diagnosis, attention layers, intent-based flow, controlled redesign and a proposed validation plan. No measured improvement is claimed.</desc>
+<defs>
+  <pattern id="tcb-motion-grid" width="140" height="140" patternUnits="userSpaceOnUse"><path d="M140 0H0V140" fill="none" stroke="#e5e7eb" stroke-width=".7"/></pattern>
+  <filter id="tcb-motion-shadow" x="-15%" y="-20%" width="130%" height="150%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#131f3c" flood-opacity=".055"/></filter>
+  <marker id="tcb-motion-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M1 1L7 4L1 7" fill="none" stroke="#23262c" stroke-width="1.2"/></marker>
+  <linearGradient id="tcb-motion-paper-grad" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#fdfdff"/></linearGradient>
+</defs>
+<rect id="tcb-motion-background" width="1120" height="680" fill="url(#tcb-motion-paper-grad)"/>
+<rect id="tcb-motion-grid-area" x="18" y="18" width="1084" height="644" fill="url(#tcb-motion-grid)" opacity=".35"/>
+<path class="tcb-motion-decoration" d="M20 48H80M48 20V80M1040 48H1100M1072 20V80M20 632H80M48 602V662M1040 632H1100M1072 602V662" stroke="#e0e3e8" fill="none"/>
+<rect x="43" y="43" width="10" height="10" fill="#d71920"/>
+<g id="tcb-motion-links">
+<path class="connector" id="tcb-motion-link1" d="M558 137H579" marker-end="url(#tcb-motion-arrow)"/>
+<path class="connector" id="tcb-motion-link2" d="M1056 137H1067Q1078 137 1078 148V326Q1078 337 1067 337H1056" marker-end="url(#tcb-motion-arrow)"/>
+<path class="connector" id="tcb-motion-link3" d="M580 337H559" marker-end="url(#tcb-motion-arrow)"/>
+<path class="connector" id="tcb-motion-link4" d="M84 337H54Q42 337 42 349V526Q42 537 54 537H84" marker-end="url(#tcb-motion-arrow)"/>
+<path class="connector" id="tcb-motion-link5" d="M558 537H579" marker-end="url(#tcb-motion-arrow)"/>
+</g>
+<g id="tcb-motion-steps"></g>
+</svg>
+        </div>
+      </section>
 
       <section class="section white" id="research">
         <div class="shell">
@@ -1042,5 +1059,130 @@
       setTimeout(queueHeight, 1200)
     })()
   </script>
+<script id="tcb-motion-script">
+;(() => {
+const root=document.getElementById("design-process");
+
+/* One self-contained, editable vector animation. Timeline length: 16 seconds. */
+const RED='#d71920', INK='#17191d', GRAY='#7a818b';
+const rect=(x,y,w,h,fill='#f3f3f2',rx=0,extra='')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${fill}" ${extra}/>`;
+const text=(x,y,s,size=10,fill=GRAY,extra='')=>`<text x="${x}" y="${y}" font-size="${size}" fill="${fill}" ${extra}>${s}</text>`;
+const line=(x,y,w,color='#d0d1d0',h=3)=>rect(x,y,w,h,color,1);
+const tag=(x,y,s,color=RED,bg='#fff1f1',w=42)=>rect(x,y,w,14,bg,2)+text(x+w/2,y+10,s,7,color,'text-anchor="middle" font-weight="700" letter-spacing=".4"');
+const step=(n,x,y,eyebrow,title,input,decision,inside)=>`<g class="step" id="step${n}" transform="translate(${x} ${y})">
+ ${text(0,0,'0'+n,9,RED,'font-weight="700"')}${text(24,0,eyebrow,9)}
+ ${rect(0,18,474,144,'#fff',0,'stroke="#edf0f4" filter="url(#shadow)"')}
+ <g transform="translate(12 29)">${inside}</g>
+ </g>`;
+
+function evidence(){
+ let s='';const source=[['MARKET','Context','Public reports'],['BENCHMARK','10 apps','Banking + fintech'],['REVIEWS','153','UI/UX-related']];
+ source.forEach((a,i)=>{const x=5+i*88;s+=`<g id="source${i}">${rect(x,7,80,95,'#f8f8f8',3)}${text(x+8,23,a[0],6,GRAY,'font-weight="700" letter-spacing=".5"')}${text(x+8,52,a[1],i===0?16:i===1?19:23,INK,'font-weight="700"')}${line(x+8,65,59,'#dedede',2)}${text(x+8,80,a[2],6)}</g>`});
+ s+=`<path d="M276 53H293" fill="none" stroke="#adb2ba" marker-end="url(#arrow)"/><g id="themes">${rect(302,7,142,95,'#fff7f7',3,'stroke="#f3c6c8"')}${text(313,25,'Recurring signals',9,RED,'font-weight="700"')}${text(313,46,'Hard to find features',8,INK)}${text(313,66,'Changes feel unstable',8,INK)}${tag(313,79,'SIGNALS',RED,'#fee8e8',66)}</g>`;
+ return s;
+}
+function diagnosis(){
+ let s=text(6,12,'Similar visual priority',8,GRAY);
+ ['Balance','Transfer','QR / Cards','Offers'].forEach((a,i)=>{let x=6+(i%2)*91,y=24+Math.floor(i/2)*39;s+=rect(x,y,83,31,'#f1f2f4',3)+text(x+41,y+19,a,8,INK,'text-anchor="middle"')});
+ s+=`<path d="M189 60H214" fill="none" stroke="#adb2ba" stroke-dasharray="3 3" marker-end="url(#arrow)"/>
+ <g id="hypothesis">${rect(231,22,212,74,'#fff6f6',3,'stroke="#d71920"')}${text(242,40,'WORKING HYPOTHESIS',7,RED,'font-weight="700" letter-spacing=".5"')}${text(242,59,'Different jobs compete for',11,INK,'font-weight="700"')}${text(242,75,'the same moment of attention.',11,INK,'font-weight="700"')}</g>`;
+ return s;
+}
+function strategy(){
+ const names=['CONTEXT','TRUST','CORE','QUICK','GROWTH'],roles=['Orient','Reassure','Focus','Accelerate','Discover'];let s='';
+ names.forEach((n,i)=>{let x=5+i*89;s+=`<g id="layer${i}">${rect(x,10,80,91,i===1||i===3?'#fff1f1':'#f6f6f6',3)}${text(x+9,30,'0'+(i+1),8,RED,'font-weight="700"')}${text(x+9,55,n,8,INK,'font-weight="700"')}${line(x+9,65,55,i===1||i===3?'#e9b7ba':'#ddd',2)}${text(x+9,82,roles[i],8)}</g>`;
+ if(i<4)s+=`<path d="M${x+81} 55H${x+87}" stroke="#aeb4be" fill="none"/>`});
+ return s;
+}
+function intentFlow(){
+ let s=rect(6,40,108,45,'#f4f4f4',3)+text(60,57,'Open Home',10,INK,'text-anchor="middle" font-weight="700"')+text(60,73,'Identity + balance',7,GRAY,'text-anchor="middle"');
+ s+=`<path d="M114 62H146V20H174M146 62H174M146 62V104H174" fill="none" stroke="#b3b8c0" stroke-width="1.1"/>`;
+ const branches=[['NOW','QR · Cards · Alerts'],['CAREFULLY','Enter → Review → Confirm'],['LATER','Services after utility']];
+ branches.forEach((a,i)=>{let y=3+i*42;s+=`<g id="branch${i}">${rect(175,y,268,34,i===0?'#fff1f1':'#f6f6f6',3)}${text(187,y+14,a[0],7,i===0?RED:INK,'font-weight="700" letter-spacing=".5"')}${text(187,y+26,a[1],8,GRAY)}</g>`});
+ return s;
+}
+function selectedConcept(){
+ let s=rect(30,0,89,131,'#fff',9,'stroke="#24262a" stroke-width="1.2"')+rect(63,5,23,3,'#222',2)+text(37,20,'Home',6,INK,'font-weight="700"')+rect(98,14,8,8,'#e5e5e5',4);
+ s+=`<g id="balance-block">${rect(37,28,75,29,'#fafafa',3)}${text(43,38,'Available balance',5)}${text(43,49,'••••••••',9,INK,'font-weight="700"')}${rect(100,41,7,5,'#ddd',2)}</g>`;
+ s+=`<g id="transfer-block">${rect(37,64,35,22,RED,3)}${text(54,77,'Transfer',5,'#fff','text-anchor="middle"')}${rect(77,64,35,22,'#f1f1f1',3)}${text(94,77,'Pay',5,INK,'text-anchor="middle"')}</g>`;
+ s+=rect(37,92,75,12,'#f2f2f2',2)+text(42,100,'Services after utility',4);
+ s+=`<g id="quick-block">${rect(37,112,75,12,'#fff1f1',2)}${text(44,120,'QR',5,RED)}${text(64,120,'Cards',5,RED)}${text(89,120,'Alerts',5,RED)}</g>`;
+ s+=tag(158,1,'OPTION A · CHOSEN',RED,'#fff1f1',133)+text(158,38,'Stable balance states',10,INK,'font-weight="700"')+text(158,54,'Clearer transaction area',10,INK,'font-weight="700"')+text(158,70,'Persistent urgent actions',10,INK,'font-weight="700"')+text(158,94,'Trade-off: less visual novelty;',8)+text(158,107,'some legacy constraints remain.',8);
+ return s;
+}
+function validation(){
+ let s=text(6,12,'MEASURE FIRST',8,INK,'font-weight="700" letter-spacing=".5"')+tag(299,1,'PLAN · NOT EXECUTED','#94601b','#fff6e8',142);
+ const rows=[['Time-to-QR','Compare with baseline'],['Transfer + task success','Protect careful completion'],['Familiarity + banner CTR','Guard learning + business impact']];
+ rows.forEach((a,i)=>{let y=27+i*26;s+=`<g id="metric${i}">${rect(6,y,435,22,'#f7f7f7',2)}${text(15,y+14,a[0],8,INK,'font-weight="700"')}${text(216,y+14,a[1],7)}</g>`});
+ s+=`<g id="rollout">${text(6,125,'Baseline → User testing → Layered rollout → Rollback gates',8,RED,'font-weight="700"')}</g>`;
+ return s;
+}
+root.querySelector('#tcb-motion-steps').innerHTML=(
+ step(1,84,60,'External signals · Research','Gather evidence','Public reports, app benchmark and relevant reviews.','Treat recurring themes as signals, not prevalence.',evidence())+
+ step(2,582,60,'Audit + 5 Whys · Hypothesis','Frame the problem','Trust, core actions, urgent jobs and offers compete.','Investigate priority rules before changing the UI.',diagnosis())+
+ step(3,582,260,'Layered attention · Proposed strategy','Give each layer a role','Context → Trust → Core → Quick → Growth.','Match attention to urgency, risk and decision effort.',strategy())+
+ step(4,84,260,'Intent-based paths · Proposed flow','Design around user intent','Shared entry; urgent, careful and discovery paths.','Keep urgent actions close; add review to transactions.',intentFlow())+
+ step(5,84,460,'Controlled modernization · Selected concept','Preserve familiarity','Option A changes hierarchy, spacing and quick access.','Keep the mental model; accept a smaller visual shift.',selectedConcept())+
+ step(6,582,460,'Validation pending · Proposed next steps','Validate before claiming impact','Baseline, task success, familiarity and banner CTR.','Test the concept; release by layer only if supported.',validation())+
+ `<g id="start-tag">${text(411,60,'EVIDENCE FIRST',8,RED,'font-weight="700" letter-spacing=".7"')}</g>`).replaceAll('id="','id="tcb-motion-').replaceAll('url(#','url(#tcb-motion-');
+
+const $=id=>document.getElementById('tcb-motion-'+id), clamp=x=>Math.max(0,Math.min(1,x));
+const ease=x=>1-Math.pow(1-clamp(x),3), duration=16;
+const starts=[.2,1.6,3.2,4.8,6.4,8.0];
+const steps=starts.map((s,i)=>({el:$('step'+(i+1)),s,x:i===0||i===3||i===4?84:582,y:i<2?60:i<4?260:460}));
+const links=[1,2,3,4,5].map(n=>{const el=$('link'+n),len=el.getTotalLength();el.style.strokeDasharray=len;return{el,len}});
+const motionPreference=matchMedia('(prefers-reduced-motion: reduce)');
+const mobileQuery=matchMedia('(max-width: 640px)');
+let time=0,playing=!motionPreference.matches,speed=1.5,last=null,inView=false;
+function layout(){
+ const mobile=mobileQuery.matches;
+ root.dataset.layout=mobile?'mobile':'desktop';
+ $('art').setAttribute('viewBox',mobile?'0 0 570 1260':'0 0 1120 680');
+ $('background').setAttribute('width',mobile?570:1120);
+ $('background').setAttribute('height',mobile?1260:680);
+ $('grid-area').setAttribute('width',mobile?534:1084);
+ $('grid-area').setAttribute('height',mobile?1224:644);
+ steps.forEach((item,i)=>{item.x=mobile?48:(i===0||i===3||i===4?84:582);item.y=mobile?60+i*200:(i<2?60:i<4?260:460)});
+ const desktop=['M558 137H579','M1056 137H1067Q1078 137 1078 148V326Q1078 337 1067 337H1056','M580 337H559','M84 337H54Q42 337 42 349V526Q42 537 54 537H84','M558 537H579'];
+ links.forEach((link,i)=>{
+  const y=137+i*200,next=y+200;
+  link.el.setAttribute('d',mobile?`M522 ${y}H534Q546 ${y} 546 ${y+12}V${next-12}Q546 ${next} 534 ${next}H522`:desktop[i]);
+  link.len=link.el.getTotalLength();link.el.style.strokeDasharray=link.len;
+ });
+ $('start-tag').querySelector('text').setAttribute('x',mobile?375:411);
+ $('start-tag').querySelector('text').setAttribute('font-size',mobile?10:8);
+ steps.forEach(({el})=>{const labels=el.querySelectorAll(':scope > text');labels.forEach(label=>label.setAttribute('font-size',mobile?12:9))});
+ render(time);
+}
+
+function opacity(id,val){$(id).style.opacity=clamp(val)}
+function render(t){
+ const fade=t>14.7?clamp((16-t)/1.3):1;
+ steps.forEach(({el,s,x,y})=>{const v=ease((t-s)/.75);el.style.opacity=v*fade;el.setAttribute('transform',`translate(${x} ${y+12*(1-v)})`)});
+ links.forEach(({el,len},i)=>{el.style.strokeDashoffset=len*(1-ease((t-starts[i+1]+.45)/.8));el.style.opacity=fade});
+ opacity('start-tag',ease(t/.5)*fade);
+ for(let i=0;i<3;i++)opacity('source'+i,ease((t-.5-i*.18)/.5));
+ opacity('themes',ease((t-1.05)/.6));
+ opacity('hypothesis',ease((t-2.2)/.6));
+ for(let i=0;i<5;i++)opacity('layer'+i,ease((t-3.6-i*.12)/.5));
+ for(let i=0;i<3;i++)opacity('branch'+i,ease((t-5.2-i*.2)/.5));
+ opacity('balance-block',ease((t-6.8)/.4));
+ opacity('transfer-block',ease((t-7.1)/.4));
+ opacity('quick-block',ease((t-7.4)/.4));
+ for(let i=0;i<3;i++)opacity('metric'+i,ease((t-8.5-i*.2)/.5));
+ opacity('rollout',ease((t-9.3)/.5));
+}
+function tick(now){if(last!==null&&playing&&inView&&!document.hidden){time=(time+Math.min((now-last)/1000,.1)*speed)%duration;render(time)}last=now;requestAnimationFrame(tick)}
+if(!playing)time=12;
+window.addEventListener('beforeprint',()=>{playing=false;time=12;render(time)});
+window.addEventListener('resize',layout,{passive:true});
+motionPreference.addEventListener?.('change',event=>{if(event.matches){playing=false;time=12;render(time)}});
+if('IntersectionObserver' in window){
+ new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;last=null},{threshold:.08}).observe(root);
+}else inView=true;
+layout();render(time);requestAnimationFrame(tick);
+
+})();
+</script>
 </body>
 </html>
